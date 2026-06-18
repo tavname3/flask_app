@@ -7,12 +7,12 @@ y Asignaciones que originalmente corría por terminal con `input()`.
 
 ```
 flask_app/
-├── app.py                  # Rutas Flask (toda la lógica que antes estaba en connection_db.py)
+├── app.py                  
 ├── requirements.txt
 ├── static/
 │   └── style.css
 └── templates/
-    ├── base.html            # layout con cabecera y pestañas de navegación
+    ├── base.html            
     ├── index.html
     ├── empleados_list.html
     ├── empleado_form.html
