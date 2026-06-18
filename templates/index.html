@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Inicio · Sistema Empresa{% endblock %}
+{% block content %}
+<section class="folder-grid">
+  <a class="folder-card" href="{{ url_for('empleados_list') }}">
+    <span class="folder-tab-mini">01</span>
+    <h2>Empleados</h2>
+    <p>Altas, bajas y cambios del personal.</p>
+  </a>
+  <a class="folder-card" href="{{ url_for('departamentos_list') }}">
+    <span class="folder-tab-mini">02</span>
+    <h2>Departamentos</h2>
+    <p>Gerencias, sedes y plantilla por área.</p>
+  </a>
+  <a class="folder-card" href="{{ url_for('proyectos_list') }}">
+    <span class="folder-tab-mini">03</span>
+    <h2>Proyectos</h2>
+    <p>Asignación de horas por proyecto.</p>
+  </a>
+  <a class="folder-card" href="{{ url_for('consultas_menu') }}">
+    <span class="folder-tab-mini">04</span>
+    <h2>Consultas especiales</h2>
+    <p>Tres reportes analíticos listos para revisar.</p>
+  </a>
+</section>
+{% endblock %}

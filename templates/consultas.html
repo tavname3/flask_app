@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Consultas especiales · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head"><h2>Consultas especiales</h2></div>
+<section class="folder-grid">
+  {% for n, c in consultas.items() %}
+  <a class="folder-card" href="{{ url_for('consulta_resultado', n=n) }}">
+    <span class="folder-tab-mini">{{ '%02d'|format(n) }}</span>
+    <h2>{{ c['titulo'] }}</h2>
+  </a>
+  {% endfor %}
+</section>
+{% endblock %}

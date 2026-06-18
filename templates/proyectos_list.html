@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Proyectos · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head">
+  <h2>Proyectos</h2>
+  <a class="btn btn-primary" href="{{ url_for('proyecto_nuevo') }}">+ Nuevo proyecto</a>
+</div>
+
+{% if rows %}
+<div class="table-wrap">
+  <table class="ledger-table">
+    <thead><tr><th>ID</th><th>Nombre</th><th>Lugar</th><th>Departamento</th><th>Trabajadores</th><th>Horas totales</th></tr></thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td class="stamp-cell">{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+        <td>{{ r[5] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="empty-state">Todavía no hay proyectos registrados.</p>
+{% endif %}
+{% endblock %}

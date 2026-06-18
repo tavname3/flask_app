@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if modo == 'editar' else 'Nuevo' }} empleado · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head">
+  <h2>{{ 'Editar empleado' if modo == 'editar' else 'Nuevo empleado' }}</h2>
+</div>
+
+<form class="card-form" method="post">
+  <div class="field-grid">
+    {% if modo == 'crear' %}
+    <label class="field">
+      <span>NSS (11 dígitos)</span>
+      <input type="text" name="nss" required pattern="\d{11}" maxlength="11" placeholder="00000000000">
+    </label>
+    {% else %}
+    <label class="field">
+      <span>NSS</span>
+      <input type="text" value="{{ empleado['nss'] }}" disabled>
+    </label>
+    {% endif %}
+
+    <label class="field">
+      <span>Departamento</span>
+      <select name="num_depto" required>
+        {% for d in deptos %}
+          <option value="{{ d[0] }}" {{ 'selected' if empleado and empleado['num_depto'] == d[0] else '' }}>{{ d[1] }}</option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label class="field">
+      <span>Nombre de pila</span>
+      <input type="text" name="nombre_pila" required value="{{ empleado['nombrepila'] if empleado else '' }}">
+    </label>
+
+    <label class="field">
+      <span>Apellido paterno</span>
+      <input type="text" name="paterno" required value="{{ empleado['paterno'] if empleado else '' }}">
+    </label>
+
+    <label class="field">
+      <span>Apellido materno</span>
+      <input type="text" name="materno" value="{{ empleado['materno'] if empleado else '' }}">
+    </label>
+
+    <label class="field">
+      <span>Sexo</span>
+      <select name="sexo" required>
+        <option value="M" {{ 'selected' if empleado and empleado['sexo'] == 'M' else '' }}>M</option>
+        <option value="F" {{ 'selected' if empleado and empleado['sexo'] == 'F' else '' }}>F</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span>Salario</span>
+      <input type="number" step="0.01" name="salario" required value="{{ empleado['salario'] if empleado else '' }}">
+    </label>
+
+    <label class="field">
+      <span>Fecha de nacimiento</span>
+      <input type="date" name="fecha_nac" required value="{{ empleado['fechanac'] if empleado else '' }}">
+    </label>
+
+    <label class="field field-wide">
+      <span>Dirección</span>
+      <input type="text" name="direccion" required value="{{ empleado['direccion'] if empleado else '' }}">
+    </label>
+
+    <label class="field">
+      <span>NSS del supervisor (opcional)</span>
+      <input type="text" name="supervisor" value="{{ empleado['nss_supervisor'] if empleado else '' }}">
+    </label>
+  </div>
+
+  <div class="form-actions">
+    <a class="btn btn-ghost" href="{{ url_for('empleados_list') }}">Cancelar</a>
+    <button class="btn btn-primary" type="submit">{{ 'Guardar cambios' if modo == 'editar' else 'Crear empleado' }}</button>
+  </div>
+</form>
+{% endblock %}

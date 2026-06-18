@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Error de conexión · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="empty-state error-state">
+  <h2>No se pudo conectar a la base de datos</h2>
+  <p>{{ error }}</p>
+  <p>Revisa los datos en <code>DB_CONFIG</code> dentro de <code>app.py</code> y confirma que PostgreSQL esté corriendo.</p>
+</div>
+{% endblock %}

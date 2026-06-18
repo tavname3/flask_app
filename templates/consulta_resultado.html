@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ titulo }} · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head">
+  <h2>{{ titulo }}</h2>
+  <a class="btn btn-ghost" href="{{ url_for('consultas_menu') }}">← Otra consulta</a>
+</div>
+
+{% if rows %}
+<div class="table-wrap">
+  <table class="ledger-table">
+    <thead>
+      <tr>{% for c in cols %}<th>{{ c }}</th>{% endfor %}</tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>{% for v in r %}<td>{{ v if v is not none else '—' }}</td>{% endfor %}</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="ledger-total">Total: {{ rows|length }} resultado(s)</p>
+{% else %}
+<p class="empty-state">Esta consulta no arrojó resultados con los datos actuales.</p>
+{% endif %}
+{% endblock %}

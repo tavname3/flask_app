@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Departamentos · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head">
+  <h2>Departamentos</h2>
+  <a class="btn btn-primary" href="{{ url_for('departamento_nuevo') }}">+ Nuevo departamento</a>
+</div>
+
+{% if rows %}
+<div class="table-wrap">
+  <table class="ledger-table">
+    <thead>
+      <tr><th>ID</th><th>Nombre</th><th>Gerente</th><th>Desde</th><th>Sedes</th><th>Empleados</th></tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td class="stamp-cell">{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] or 'Sin asignar' }}</td>
+        <td>{{ r[3] or '—' }}</td>
+        <td>{{ r[4] or '—' }}</td>
+        <td>{{ r[5] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="empty-state">Todavía no hay departamentos registrados.</p>
+{% endif %}
+{% endblock %}

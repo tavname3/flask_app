@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Nuevo departamento · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head"><h2>Nuevo departamento</h2></div>
+<form class="card-form" method="post">
+  <div class="field-grid">
+    <label class="field field-wide">
+      <span>Nombre del departamento</span>
+      <input type="text" name="nombre" required>
+    </label>
+    <label class="field">
+      <span>NSS del gerente (opcional)</span>
+      <input type="text" name="gerente">
+    </label>
+    <label class="field">
+      <span>Fecha de inicio del gerente</span>
+      <input type="date" name="fecha">
+    </label>
+    <label class="field field-wide">
+      <span>Sedes (separadas por coma)</span>
+      <input type="text" name="lugares" placeholder="Puebla, Tehuacán, CDMX">
+    </label>
+  </div>
+  <div class="form-actions">
+    <a class="btn btn-ghost" href="{{ url_for('departamentos_list') }}">Cancelar</a>
+    <button class="btn btn-primary" type="submit">Crear departamento</button>
+  </div>
+</form>
+{% endblock %}

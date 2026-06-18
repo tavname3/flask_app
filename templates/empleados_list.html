@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Empleados · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head">
+  <h2>Empleados</h2>
+  <a class="btn btn-primary" href="{{ url_for('empleado_nuevo') }}">+ Nuevo empleado</a>
+</div>
+
+<form class="filter-bar" method="get">
+  <label for="depto">Filtrar por departamento</label>
+  <select name="depto" id="depto" onchange="this.form.submit()">
+    <option value="">Todos</option>
+    {% for d in deptos %}
+      <option value="{{ d[0] }}" {{ 'selected' if depto_actual == d[0]|string else '' }}>{{ d[1] }}</option>
+    {% endfor %}
+  </select>
+</form>
+
+{% if rows %}
+<div class="table-wrap">
+  <table class="ledger-table">
+    <thead>
+      <tr>
+        <th>NSS</th><th>Nombre</th><th>Apellido P.</th><th>Apellido M.</th>
+        <th>Sexo</th><th>Salario</th><th>Nacimiento</th><th>Depto</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td class="stamp-cell">{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] or '—' }}</td>
+        <td>{{ r[4] }}</td>
+        <td>${{ '%.2f'|format(r[5]) }}</td>
+        <td>{{ r[6] }}</td>
+        <td>{{ r[7] }}</td>
+        <td class="row-actions">
+          <a class="link-edit" href="{{ url_for('empleado_editar', nss=r[0]) }}">Editar</a>
+          <form method="post" action="{{ url_for('empleado_eliminar', nss=r[0]) }}"
+                onsubmit="return confirm('¿Eliminar al empleado {{ r[0] }}? También se eliminan sus dependientes y asignaciones.');">
+            <button class="link-delete" type="submit">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<p class="ledger-total">Total: {{ rows|length }} registro(s)</p>
+{% else %}
+<p class="empty-state">No hay empleados que coincidan con este filtro. Da clic en «Nuevo empleado» para dar de alta el primero.</p>
+{% endif %}
+{% endblock %}

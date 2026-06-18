@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Sistema Empresa{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="cabinet-header">
+    <div class="stamp-logo" aria-hidden="true">UTP</div>
+    <div class="header-text">
+      <p class="eyebrow">Universidad Tecnológica de Puebla · Inteligencia de Negocios</p>
+      <h1>Sistema Empresa</h1>
+    </div>
+  </header>
+
+  <nav class="folder-tabs">
+    <a class="tab {{ 'is-active' if request.path == '/' else '' }}" href="{{ url_for('index') }}">Inicio</a>
+    <a class="tab {{ 'is-active' if '/empleados' in request.path else '' }}" href="{{ url_for('empleados_list') }}">Empleados</a>
+    <a class="tab {{ 'is-active' if '/departamentos' in request.path else '' }}" href="{{ url_for('departamentos_list') }}">Departamentos</a>
+    <a class="tab {{ 'is-active' if '/proyectos' in request.path else '' }}" href="{{ url_for('proyectos_list') }}">Proyectos</a>
+    <a class="tab {{ 'is-active' if '/asignaciones' in request.path else '' }}" href="{{ url_for('asignaciones_list') }}">Asignaciones</a>
+    <a class="tab {{ 'is-active' if '/consultas' in request.path else '' }}" href="{{ url_for('consultas_menu') }}">Consultas</a>
+  </nav>
+
+  <main class="ledger">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-stack">
+          {% for category, message in messages %}
+            <p class="flash flash-{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="desk-footer">
+    <p>Expediente generado por el Sistema Empresa &middot; PostgreSQL + Flask</p>
+  </footer>
+</body>
+</html>

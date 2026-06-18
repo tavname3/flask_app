@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Asignaciones · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head">
+  <h2>Asignaciones</h2>
+  <a class="btn btn-primary" href="{{ url_for('asignacion_nueva') }}">+ Nueva asignación</a>
+</div>
+
+<form class="filter-bar" method="get">
+  <label for="nss">Filtrar por NSS de empleado</label>
+  <input type="text" id="nss" name="nss" value="{{ nss_filtro }}" placeholder="NSS">
+  <button class="btn btn-ghost" type="submit">Filtrar</button>
+</form>
+
+{% if rows %}
+<div class="table-wrap">
+  <table class="ledger-table">
+    <thead><tr><th>Empleado</th><th>NSS</th><th>Proyecto</th><th>Lugar</th><th>Horas</th></tr></thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td>{{ r[0] }}</td>
+        <td class="stamp-cell">{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="empty-state">Sin asignaciones registradas todavía.</p>
+{% endif %}
+{% endblock %}

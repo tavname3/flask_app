@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Nuevo proyecto · Sistema Empresa{% endblock %}
+{% block content %}
+<div class="ledger-head"><h2>Nuevo proyecto</h2></div>
+<form class="card-form" method="post">
+  <div class="field-grid">
+    <label class="field field-wide">
+      <span>Nombre del proyecto</span>
+      <input type="text" name="nombre" required>
+    </label>
+    <label class="field">
+      <span>Lugar</span>
+      <input type="text" name="lugar" required>
+    </label>
+    <label class="field">
+      <span>Departamento</span>
+      <select name="depto" required>
+        {% for d in deptos %}
+          <option value="{{ d[0] }}">{{ d[1] }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </div>
+  <div class="form-actions">
+    <a class="btn btn-ghost" href="{{ url_for('proyectos_list') }}">Cancelar</a>
+    <button class="btn btn-primary" type="submit">Crear proyecto</button>
+  </div>
+</form>
+{% endblock %}
