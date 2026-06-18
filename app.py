@@ -9,14 +9,14 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "cambia-esta-clave-en-produccion")
 
 # ------------------------------------------------------------------
-#  CONFIGURACIÓN DE CONEXIÓN  (idéntica a tu script original)
+#  CONFIGURACIÓN DE CONEXIÓN
 # ------------------------------------------------------------------
 DB_CONFIG = {
     "host":     "localhost",
     "port":     5432,
     "database": "empresa_db",
-    "user":     "spike",
-    "password": "pass_1234",   # ← cambia por tu contraseña
+    "user":     "spike",	# ← cambiar por usuario a usar 
+    "password": "pass_1234",   # ← cambiar por contraseña del usuario
 }
 
 
